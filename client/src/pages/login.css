@@ -1,0 +1,34 @@
+/* FORCE layout control */
+.login-page {
+  display: flex;
+}
+
+/* Tablet and below */
+@media (max-width: 900px) {
+  .login-page {
+    flex-direction: column !important; /* override inline */
+  }
+
+  .login-left {
+    width: 100% !important;
+    padding: 2rem 1.5rem !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .login-right {
+    width: 100% !important;
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .login-left {
+    display: none !important; /* clean mobile UI */
+  }
+
+  .login-right {
+    padding: 1.5rem 1rem !important;
+  }
+}

@@ -1,0 +1,310 @@
+/* ── DESIGN TOKENS ──────────────────────────────────────────────────────────── */
+:root {
+  /* typography */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* neutral palette — near-black to near-white */
+  --gray-950: #0a0a0b;
+  --gray-900: #0f0f10;
+  --gray-800: #1a1a1c;
+  --gray-700: #2a2a2d;
+  --gray-600: #3f3f44;
+  --gray-500: #6b6b72;
+  --gray-400: #9b9ba2;
+  --gray-300: #c8c8cd;
+  --gray-200: #e4e4e7;
+  --gray-100: #f4f4f5;
+  --gray-50:  #fafaf9;
+
+  /* brand accent — emerald */
+  --accent:       #10b981;
+  --accent-light: #d1fae5;
+  --accent-dark:  #059669;
+  --accent-dim:   rgba(16, 185, 129, 0.12);
+
+  /* semantic colors */
+  --danger:       #ef4444;
+  --danger-light: #fee2e2;
+  --danger-dim:   rgba(239, 68, 68, 0.10);
+  --warning:      #f59e0b;
+  --warning-light:#fef3c7;
+  --info:         #3b82f6;
+  --info-light:   #dbeafe;
+
+  /* surfaces */
+  --surface-app:      var(--gray-50);
+  --surface-card:     #ffffff;
+  --surface-sidebar:  var(--gray-900);
+  --surface-elevated: #ffffff;
+
+  /* text */
+  --text-primary:   var(--gray-900);
+  --text-secondary: var(--gray-500);
+  --text-tertiary:  var(--gray-400);
+  --text-inverse:   #ffffff;
+  --text-on-dark:   rgba(255,255,255,0.88);
+  --text-muted-dark:rgba(255,255,255,0.45);
+
+  /* borders */
+  --border:        var(--gray-200);
+  --border-strong: var(--gray-300);
+  --border-dark:   rgba(255,255,255,0.08);
+
+  /* layout */
+  --sidebar-width: 260px;
+  --topbar-height: 60px;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-full: 9999px;
+
+  /* shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+
+  /* transitions */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 200ms;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--surface-app);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ── TYPOGRAPHY SCALE ───────────────────────────────────────────────────────── */
+.text-xs   { font-size: 11px; line-height: 1.4; }
+.text-sm   { font-size: 13px; line-height: 1.5; }
+.text-base { font-size: 15px; line-height: 1.6; }
+.text-lg   { font-size: 17px; line-height: 1.5; }
+.text-xl   { font-size: 20px; line-height: 1.4; }
+.text-2xl  { font-size: 24px; line-height: 1.3; }
+.text-3xl  { font-size: 30px; line-height: 1.25; }
+.text-4xl  { font-size: 38px; line-height: 1.15; }
+
+/* ── UTILITY CLASSES ────────────────────────────────────────────────────────── */
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--text-secondary); }
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── FORM ELEMENTS ──────────────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color var(--duration) var(--ease),
+              box-shadow var(--duration) var(--ease);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.input::placeholder { color: var(--text-tertiary); }
+
+/* ── BUTTONS ────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  transition: all var(--duration) var(--ease);
+  white-space: nowrap;
+  border: none;
+}
+
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--gray-100);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.btn-danger {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1.5px solid transparent;
+}
+.btn-danger:hover:not(:disabled) {
+  background: var(--danger-light);
+}
+
+.btn-sm { padding: 7px 14px; font-size: 13px; }
+.btn-lg { padding: 13px 28px; font-size: 15px; font-weight: 600; }
+
+/* ── CARDS ──────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── BADGE ──────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-green  { background: var(--accent-light);   color: var(--accent-dark); }
+.badge-red    { background: var(--danger-light);   color: var(--danger); }
+.badge-gray   { background: var(--gray-100);       color: var(--gray-600); }
+.badge-blue   { background: var(--info-light);     color: var(--info); }
+.badge-yellow { background: var(--warning-light);  color: var(--warning); }
+
+/* ── DIVIDER ────────────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  border: none;
+  margin: 0;
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeUp   { animation: fadeUp 0.45s var(--ease) both; }
+.animate-fadeIn   { animation: fadeIn 0.3s var(--ease) both; }
+.animate-scaleIn  { animation: scaleIn 0.3s var(--ease) both; }
+
+/* stagger delays for list items */
+.delay-1 { animation-delay: 60ms; }
+.delay-2 { animation-delay: 120ms; }
+.delay-3 { animation-delay: 180ms; }
+.delay-4 { animation-delay: 240ms; }
+.delay-5 { animation-delay: 300ms; }
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 4px; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --sidebar-width: 0px; }
+}
+
+/* ── FOCUS VISIBLE ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── WORD BREAK ─────────────────────────────────────────────────────────────── */
+p, span, h1, h2, h3, h4 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ── MOBILE: hide sidebar, show full-width content ── */
+@media (max-width: 768px) {
+  /* sidebar slides off-screen on mobile */
+  aside {
+    display: none;
+  }
+
+  /* main fills the full width */
+  main {
+    width: 100%;
+  }
+
+  /* tighten content padding on small screens */
+  .content-pad {
+    padding: 1rem !important;
+  }
+
+  /* stack auth pages vertically on mobile */
+  .auth-left {
+    display: none;
+  }
+}

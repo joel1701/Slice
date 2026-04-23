@@ -1,0 +1,17 @@
+{
+  "name": "Slice",
+  "short_name": "Slice",
+  "description": "Split expenses with friends",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#0f0f10",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
