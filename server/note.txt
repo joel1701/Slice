@@ -21,3 +21,5 @@ group id
 make the website responsive
 
 google app password- kdmo bwnp vate tpva
+
+add github readme using claude, also push to github
