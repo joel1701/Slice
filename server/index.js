@@ -19,6 +19,15 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://splitease.vercel.app',      // your vercel URL
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
+  credentials: true,
+}));
+
 app.get('/', (req, res) => {
   res.json({ message: 'Slice API running', timestamp: new Date().toISOString() });
 });
