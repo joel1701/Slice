@@ -1,34 +1,101 @@
-/* FORCE layout control */
+/* Auth layout (shared by login/register pages) */
 .login-page {
   display: flex;
+  min-height: 100dvh;
 }
 
-/* Tablet and below */
-@media (max-width: 900px) {
-  .login-page {
-    flex-direction: column !important; /* override inline */
-  }
+.login-left,
+.login-right {
+  min-width: 0;
+}
 
+.login-right {
+  width: 55%;
+}
+
+.login-right .animate-fadeUp {
+  width: 100%;
+}
+
+/* Keep stats cards from squeezing too hard on medium screens */
+.stat-cards {
+  flex-wrap: wrap;
+}
+
+.stat-cards > * {
+  min-width: 140px;
+}
+
+/* Laptop / tablet */
+@media (max-width: 1024px) {
   .login-left {
-    width: 100% !important;
-    padding: 2rem 1.5rem !important;
-    text-align: center;
-    justify-content: center;
+    width: 42% !important;
+    padding: 2.25rem !important;
   }
 
   .login-right {
+    width: 58%;
+    padding: 1.75rem !important;
+  }
+}
+
+/* Tablet portrait and small tablets */
+@media (max-width: 860px) {
+  .login-page {
+    flex-direction: column !important;
+    min-height: auto;
+  }
+
+  .login-left,
+  .login-right {
     width: 100% !important;
-    padding: 2rem 1.5rem !important;
+  }
+
+  .login-left {
+    padding: 2rem 1.25rem !important;
+  }
+
+  .login-right {
+    padding: 2rem 1.25rem !important;
+    align-items: stretch !important;
+  }
+
+  .login-right .animate-fadeUp {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .stat-cards {
+    justify-content: center;
   }
 }
 
 /* Mobile */
 @media (max-width: 600px) {
+  .login-page {
+    min-height: 100dvh;
+    background: var(--gray-50);
+  }
+
   .login-left {
-    display: none !important; /* clean mobile UI */
+    display: none !important;
   }
 
   .login-right {
-    padding: 1.5rem 1rem !important;
+    width: 100% !important;
+    min-height: 100dvh;
+    padding: 1.25rem 1rem !important;
+    justify-content: center;
+  }
+
+  .login-right .animate-fadeUp {
+    max-width: 100%;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  .login-right {
+    padding: 1rem 0.875rem !important;
   }
 }
