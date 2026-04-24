@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loginUser } from '../api/auth';
 import Spinner from '../components/Spinner';
@@ -15,6 +15,10 @@ const LoginPage = () => {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // redirect target after login
+  const redirectTo = location.state?.from || '/dashboard';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +32,7 @@ const LoginPage = () => {
       const data = await loginUser(email, password);
       login(data.token, data.user);
       toast.success(`Welcome back, ${data.user.name.split(' ')[0]}!`);
-      navigate('/dashboard');
+      navigate(redirectTo);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
     } finally {
@@ -37,11 +41,9 @@ const LoginPage = () => {
   };
 
   return (
-    // ✅ CHANGED: added className for responsive layout
     <div className="login-page" style={styles.page}>
       
       {/* left panel — branding */}
-      {/* ✅ CHANGED: added className */}
       <div className="login-left" style={styles.left}>
         <div style={styles.leftInner}>
           
@@ -58,8 +60,6 @@ const LoginPage = () => {
             Track shared expenses with anyone. The math is automatic.
           </p>
 
-          {/* floating stat cards */}
-          {/* ✅ CHANGED: class added for responsive alignment */}
           <div className="stat-cards" style={styles.statCards}>
             {[
               { label: 'Groups created', value: '12,400+' },
@@ -75,7 +75,6 @@ const LoginPage = () => {
       </div>
 
       {/* right panel — form */}
-      {/* ✅ CHANGED: added className */}
       <div className="login-right" style={styles.right}>
         <div style={styles.formWrap} className="animate-fadeUp">
           
@@ -169,9 +168,8 @@ const styles = {
     color: '#fff',
   },
 
-  // ✅ CHANGED: made heading responsive
   leftHeading: {
-    fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', // responsive font
+    fontSize: 'clamp(1.4rem, 5vw, 2.2rem)',
     fontWeight: '700',
     color: '#fff',
     lineHeight: 1.2,
@@ -237,10 +235,9 @@ const styles = {
     fontWeight: '500',
   },
 
-  // ✅ CHANGED: better mobile tap size
   submitBtn: {
     marginTop: '6px',
-    padding: '14px', // increased from 12px
+    padding: '14px',
     fontSize: '15px',
     width: '100%',
   },
